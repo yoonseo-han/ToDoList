@@ -5,14 +5,14 @@ function TodoList() {
     const [filter, setFilter] = useState('all');
 
     useEffect(() => {
-        const storedTodos = JSON.parse(localStorage.getItem('todos'));
+        const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
         if (storedTodos) {
             setTodos(storedTodos);
         }
     }, []);
     
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos));
+        if(todos.length > 0 )localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
 
     function addTodo(text) {
